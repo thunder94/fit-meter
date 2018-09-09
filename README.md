@@ -5,5 +5,5 @@ Web Application in Spring Boot
 * Adding bodyweight and caloric intake for a given day
 * Modyfying above values (or deleting)
 
-##Technologies used
+## Technologies used
 Spring Boot (Security, Data), Thymeleaf, Bootstrap, H2 Embedded Database
