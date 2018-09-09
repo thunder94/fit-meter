@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>FitMeter - Home</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/custom.css}"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+
+</head>
+<body>
+	<div class="container">
+		<nav class="navbar navbar-default" style="margin-top: 5px;">
+			<div class="col-md-12 text-right">
+				<a class="navbar-brand" href="#">FitMeter</a>
+				<ul class="nav nav-pills align-pills">
+					<li role="presentation" class="active"><a href="/">Home</a></li>
+					<li role="presentation"><a href="/register">Sign up</a></li>
+					<li role="presentation"><a href="/login">Login</a></li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="text-center">
+			<h2>Welcome to FitMeter!</h2>
+		</div>	
+		
+		<table class="table">
+			<thead class="thead-light">
+		    	<tr>
+		      		<th></th>
+		      		<th>Current functionalities</th>
+		    	</tr>
+		  	</thead>
+		  	<tbody>
+		    	<tr>
+		      		<th scope="row">
+		      			<span class="glyphicon glyphicon-user"></span>
+		      		</th>
+		      		<td>User registration</td>
+		    	</tr>
+		    	<tr>
+		    		<th scope="row">
+		    			<span class="glyphicon glyphicon-lock"></span>
+		    		</th>
+		      		<td>Access secured by login page</td>
+		    	</tr>
+		    	<tr>
+		    		<th scope="row">
+		    			<span class="glyphicon glyphicon-save"></span>
+		    		</th>
+		      		<td>Adding bodyweight and caloric intake for given day</td>
+		    	</tr>
+		    	<tr>
+		    		<th scope="row">
+		    			<span class="glyphicon glyphicon-edit"></span>
+		    		</th>
+		      		<td>Modifying or deleting above values</td>
+		    	</tr>
+		 	</tbody>
+		</table>
+		
+		<div class="text-center">
+			
+    			<a href="/register" class="btn btn-info btn-lg" style="margin-right: 10px">Register now!</a>
+    			<a href="/login" class="btn btn-info btn-lg">Log in</a>
+		</div>
+		
+	</div>
+
+</body>
+</html>

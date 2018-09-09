@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>FitMeter - Registration</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/custom.css}"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+
+</head>
+<body>
+	<div class="container">
+		<nav class="navbar navbar-default" style="margin-top: 5px;">
+			<div class="col-md-12 text-right">
+				<ul class="nav nav-pills align-pills">
+					<li role="presentation"><a href="/">Home</a></li>
+					<li role="presentation" class="active"><a href="/register">Sign up</a></li>
+					<li role="presentation"><a href="/login">Login</a></li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="panel panel-primary">
+			<div class="panel-heading text-center">
+				<h3 class="panel-title">Registration form</h3>
+			</div>
+			<div class="panel-body">
+
+				<div class="text-center">
+					<form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}"
+					method="post" role="form" data-toggle="validator">
+
+						<div th:if="${confirmationMessage}" class="alert alert-success"
+							role="alert" th:text=${confirmationMessage}></div>
+
+						<div th:if="${errorMessage}" class="alert alert-danger"
+							role="alert" th:text="${errorMessage}"></div>
+
+						<div th:if="${#fields.hasErrors('name')}"
+							th:errors="*{name}"
+							class="validation-message alert alert-danger" role="alert"></div>
+
+						<div th:if="${#fields.hasErrors('username')}"
+							th:errors="*{username}"
+							class="validation-message alert alert-danger" role="alert"></div>
+
+						<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+							class="validation-message alert alert-danger" role="alert"></div>
+
+						<div class="form-group input-group has-feedback">
+							<span class="input-group-addon">
+							<span class="glyphicon glyphicon-user"></span>
+							</span>
+							<input type="text" th:field="*{name}" placeholder="Name" class="form-control" required />
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+						</div>
+
+						<div class="form-group input-group has-feedback">
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-user"></span>
+							</span>
+							<input type="text" th:field="*{username}" placeholder="Username" class="form-control" required />
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+						</div>
+
+						<div class="form-group input-group has-feedback">
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-envelope"></span>
+							</span>
+							<input type="email" th:field="*{email}" placeholder="Email Address" class="form-control" required />
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+						</div>
+						
+						<div class="form-group has-feedback">
+							<div class="input-group">
+     							<span class="input-group-addon">
+     								<span class="glyphicon glyphicon-lock"></span>
+     							</span>
+      							<input type="password" th:field="*{password}" data-minlength="6" maxlength="30" class="form-control"
+      							id="password" placeholder="Password" data-minlength-error="Minimum 6 characters" required
+      							oninvalid="this.setCustomValidity('Please enter password')" oninput="setCustomValidity('')">
+   							</div>
+    						<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+    						<div class="help-block with-errors"></div>
+  						</div>
+						
+						<div class="form-group has-feedback">
+							<div class="input-group">
+     							<span class="input-group-addon">
+     								<span class="glyphicon glyphicon-lock"></span>
+     							</span>
+      							<input type="password" data-minlength="6" maxlength="30" class="form-control"
+      							data-match="#password" data-match-error="Passwords do not match"
+      							id="inputTwitter" placeholder="Confirm password" data-minlength-error="Minimum 6 characters" required
+      							oninvalid="this.setCustomValidity('Please enter password')" oninput="setCustomValidity('')">
+   							</div>
+    						<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+    						<div class="help-block with-errors"></div>
+  						</div>
+						
+						<button type="submit" class="btn btn-primary">Register</button>
+
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

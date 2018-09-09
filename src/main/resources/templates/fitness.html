@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>FitMeter - Fitness</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/custom.css}"/>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+
+<script>
+$( function() {
+    $( "#datepicker" ).datepicker({ dateFormat: 'dd-mm-yy' });
+});
+</script>
+
+</head>
+<body>
+	<div class="container">
+	
+		<nav class="navbar navbar-default" style="margin-top: 5px;">
+			<div class="col-md-12 text-right">
+				<a class="navbar-brand" href="#">Hello, [[${#httpServletRequest.remoteUser}]]!</a>
+				<ul class="nav nav-pills align-pills">
+					<li role="presentation">
+						<a href="javascript:$('#logout').submit();">Logout</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		
+		<div class="panel panel-primary">
+			<div class="panel-heading text-center">
+				<h3 class="panel-title">Fit Log</h3>
+			</div>
+			<div class="panel-body">
+				
+				<form id="logout" th:action="@{/logout}" method="post" style="display:none">
+        		</form>
+				
+		    	<div class="text-center">
+			    	<form autocomplete="off" action="#" th:action="@{/fitness}" th:object="${fitness}"
+					method="post" role="form" data-toggle="validator" class="row">
+						
+						<input type="hidden" th:field="*{id}"/>
+						
+						<div class="col-sm-3">
+							<div class="form-group input-group has-feedback">
+								<span class="input-group-addon">kg</span>
+								<input type="number" min="0" step="0.1" th:field="*{kilograms}" placeholder="Weight" class="form-control" required />
+								<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							</div>
+						</div>
+						
+						<div class="col-sm-3">
+							<div class="form-group input-group has-feedback">
+								<span class="input-group-addon">kcal</span>
+								<input type="number" min="0" step="1" th:field="*{calories}" placeholder="Calories" class="form-control" required />
+								<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							</div>
+						</div>
+						
+						<div class="col-sm-3">
+							<div class="form-group input-group has-feedback">
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+								<input type="text" id="datepicker" th:field="*{date}" class="form-control" required />
+								<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							</div>
+						</div>
+						
+						<div class="col-sm-3">
+							<div th:if="${edit}">
+								<button type="submit" class="btn btn-primary">Edit</button>
+							</div>
+							<div th:unless="${edit}">
+								<button type="submit" class="btn btn-primary">Add</button>
+							</div>
+						</div>		
+					</form>	
+					
+					<div th:if="${not #lists.isEmpty(fitnesses)}">
+				        <h2>Your history</h2>
+				        <table class="table table-striped">
+				        	<thead>
+				        		<tr id="fitness-header">
+					                <th>Kilograms</th>
+					                <th>Calories</th>
+					                <th>Date</th>
+					                <th>Edit</th>
+					                <th>Delete</th>
+				            	</tr>
+				        	</thead>
+				        	<tbody>
+				        		<tr th:each="fitness : ${fitnesses}">
+					                <td th:text="${#numbers.formatDecimal(fitness.getKilograms(),1,1)}"></td>
+					                <td th:text="${#numbers.formatDecimal(fitness.getCalories(),1,0)}"></td>
+					                <td th:text="${#temporals.format(fitness.getDate(), 'dd-MM-yyyy')}"></td>
+					                <td><a th:href="${'/fitness/edit/' + fitness.getId()}">Edit</a> </td>
+					                <td><a th:href="${'/fitness/delete/' + fitness.getId()}">Delete</a> </td>
+				            	</tr>
+				        	</tbody>
+				        </table>
+   	 				</div>
+    			</div>
+    		</div>
+    	</div>
+	</div>
+</body>
+</html>
